@@ -1,4 +1,5 @@
 import os
+from . import db
 from flask import Flask
 from .views import indexBp
 
@@ -24,5 +25,8 @@ def create_app(test_config=None):
         pass
 
     app.register_blueprint(indexBp)
+
+    db.init_app(app)
+    
 
     return app

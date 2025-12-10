@@ -218,3 +218,5 @@ __marimo__/
 media/
 projectsite/media/
 **Agents.md
+*.sql
+*.sqlite3
