@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>WELCOME TO PSU ACADEMIC PORTAL</h1>
+<p>
+    Welcome to the PSU Academic Portal. Browse student details, grades, and teacher information in one place.<br>
+    This site is a playground to practice API requests (Postman, curl, etc.).<br>
+    Explore the data via the nav bar or jump to
+    <a href="{{ url_for('blog.students_page') }}">Students</a>,
+    <a href="{{ url_for('blog.teachers_page') }}">Teachers</a>,
+    <a href="{{ url_for('blog.grades_page') }}">Grades</a>.<br><br>
+    Want to hit the endpoints directly? Check out
+    <a href="{{ url_for('blog.api_page') }}">API endpoints</a>.
+</p>
+{% endblock %}

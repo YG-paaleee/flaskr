@@ -1,7 +1,7 @@
 import os
 from . import db
 from flask import Flask
-from .views import indexBp
+from .views import indexBp, blogBP
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
@@ -23,10 +23,11 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
+    
+    
+    db.init_app(app)
 
     app.register_blueprint(indexBp)
-
-    db.init_app(app)
-    
+    app.register_blueprint(blogBP)
 
     return app

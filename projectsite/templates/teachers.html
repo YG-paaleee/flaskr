@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h1> Teachers </h1>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>DEPARTMENT</th>
+            <th>EMAIL</th>
+            <th>PHONE NUMBER</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in rows %}
+        <tr>
+            <td>{{ row.id }}</td>
+            <td>{{ row.teacher_name }}</td>
+            <td>{{ row.department }}</td>
+            <td>{{ row.email }}</td>
+            <td>{{ row.phone }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
