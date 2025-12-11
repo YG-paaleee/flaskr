@@ -1,4 +1,52 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>API ENDPOINTS</h1>
+
+<section>
+    <h2>Base URL</h2>
+    <code>http://127.0.0.1:5000/api</code>
+    <p>All endpoints support <code>?format=json</code> (default) or <code>?format=xml</code></p>
+</section>
+
+<hr>
+
+<section>
+    <h2>Students</h2>
+    <ul>
+        <li><strong>GET</strong> <code>/students</code> - List all students</li>
+        <li><strong>GET</strong> <code>/student/:id</code> - Get student by ID</li>
+        <li><strong>POST</strong> <code>/students</code> - Create student (requires: student_name, course, year_level, email)</li>
+        <li><strong>PUT</strong> <code>/student/:id</code> - Update student (editable: student_name, course, year_level, email | <strong>id cannot be changed</strong>)</li>
+        <li><strong>DELETE</strong> <code>/student/:id</code> - Delete student</li>
+    </ul>
+</section>
+
+<hr>
+
+<section>
+    <h2>Teachers</h2>
+    <ul>
+        <li><strong>GET</strong> <code>/teachers</code> - List all teachers</li>
+        <li><strong>GET</strong> <code>/teacher/:id</code> - Get teacher by ID</li>
+        <li><strong>POST</strong> <code>/teachers</code> - Create teacher (requires: teacher_name, department, email)</li>
+        <li><strong>PUT</strong> <code>/teacher/:id</code> - Update teacher (editable: teacher_name, department, email | <strong>id cannot be changed</strong>)</li>
+        <li><strong>DELETE</strong> <code>/teacher/:id</code> - Delete teacher</li>
+    </ul>
+</section>
+
+<hr>
+
+<section>
+    <h2>Grades</h2>
+    <ul>
+        <li><strong>GET</strong> <code>/grades</code> - List all grades</li>
+        <li><strong>GET</strong> <code>/grade/:id</code> - Get grade by ID</li>
+        <li><strong>POST</strong> <code>/grades</code> - Create grade record (requires: student_id, student_name, course_code, course_name, grade, semester, school_year)</li>
+        <li><strong>PUT</strong> <code>/grade/:id</code> - Update grade (editable: student_name, course_code, course_name, grade, semester, school_year | <strong>id and student_id cannot be changed</strong>)</li>
+        <li><strong>DELETE</strong> <code>/grade/:id</code> - Delete grade</li>
+    </ul>
+</section>
+
+<hr>
+
 {% endblock %}

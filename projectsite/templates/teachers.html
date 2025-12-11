@@ -4,23 +4,20 @@
 <table>
     <thead>
         <tr>
-            <th>ID</th>
             <th>NAME</th>
             <th>DEPARTMENT</th>
             <th>EMAIL</th>
-            <th>PHONE NUMBER</th>
         </tr>
     </thead>
     <tbody>
         {% for row in rows %}
         <tr>
-            <td>{{ row.id }}</td>
             <td>{{ row.teacher_name }}</td>
             <td>{{ row.department }}</td>
             <td>{{ row.email }}</td>
-            <td>{{ row.phone }}</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+<h3>to see the full data, visit the <a href="{{ url_for('blog.api_page') }}">API endpoint</a></h3>
 {% endblock %}

@@ -4,27 +4,22 @@
 <table>
     <thead>
         <tr>
-            <th>ID</th>
             <th>NAME</th>
-            <th>COURSE CODE</th>
             <th>COURSE</th>
             <th>GRADE</th>
             <th>SEMESTER</th>
-            <th>SCHOOL YEAR</th>
         </tr>
     </thead>
     <tbody>
         {% for row in rows %}
         <tr>
-            <td>{{ row.student_id }}</td>
             <td>{{ row.student_name }}</td>
-            <td>{{ row.course_code }}</td>
             <td>{{ row.course_name }}</td>
             <td>{{ row.grade }}</td>
             <td>{{ row.semester }}</td>
-            <td>{{ row.school_year }}</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+<h3>to see the full data, visit the <a href="{{ url_for('blog.api_page') }}">API endpoint</a></h3>
 {% endblock %}

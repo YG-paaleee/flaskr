@@ -63,3 +63,26 @@ th {
 tr:hover td {
   background: #fafafa;
 }
+
+pre, code {
+  font-family: 'Courier New', monospace;
+}
+
+pre {
+  background: #2d2d2d;
+  color: #f8f8f2;
+  padding: 16px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 12px 0;
+}
+
+code {
+  background: #f0f0f0;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 14px;
+  color: #f53c92;
+}

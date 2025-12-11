@@ -2,6 +2,7 @@ import os
 from . import db
 from flask import Flask
 from .views import indexBp, blogBP
+from .api import apiBp
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
@@ -29,5 +30,6 @@ def create_app(test_config=None):
 
     app.register_blueprint(indexBp)
     app.register_blueprint(blogBP)
+    app.register_blueprint(apiBp)
 
     return app

@@ -4,7 +4,6 @@
 <table>
   <thead>
     <tr>
-      <th>ID</th>
       <th>Name</th>
       <th>Course</th>
       <th>Year</th>
@@ -14,7 +13,6 @@
   <tbody>
     {% for row in rows %}
     <tr>
-      <td>{{ row.id }}</td>
       <td>{{ row.student_name }}</td>
       <td>{{ row.course }}</td>
       <td>{{ row.year_level }}</td>
@@ -23,5 +21,5 @@
     {% endfor %}
   </tbody>
 </table>
-
+<h3>to see the full data, visit the <a href="{{ url_for('blog.api_page') }}">API endpoint</a></h3>
 {% endblock %}
