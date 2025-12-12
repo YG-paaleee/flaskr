@@ -24,8 +24,29 @@ def format_response(data, status_code=200):
 def get_students_data():
     try:
         conn = get_db()
+
+        search_filters = {
+            'student_name': 'LIKE',
+            'course': 'LIKE',
+            'year_level': '=',
+            'email': 'LIKE'
+        }
+
+        query = 'SELECT * FROM students WHERE 1=1'
+        params = []
+
+        for fields, operator in search_filters.items():
+            value = request.args.get(fields)
+            if value:
+                if operator == 'LIKE':
+                    query += f' AND {fields} LIKE %s'
+                    params.append(f'%{value}%')
+                else:
+                    query += f' AND {fields} = %s'
+                    params.append(value)
+
         with conn.cursor() as cur:
-            cur.execute('SELECT * FROM students')
+            cur.execute(query, params)
             students = cur.fetchall()
 
         return format_response(students)
@@ -39,7 +60,7 @@ def get_students_data():
         , 500)
 
 @apiBp.route('/student/<int:student_id>', methods=['GET'])
-def get_student_api(student_id):
+def get_student_data(student_id):
 
     try:
         conn = get_db()
@@ -212,8 +233,24 @@ def delete_student(student_id):
 def get_teachers_data():
     try:
         conn = get_db()
+
+        search_filters = {
+            'teacher_name': 'LIKE',
+            'department': 'LIKE',
+            'email': 'LIKE'
+        }
+
+        query = 'SELECT * FROM teachers WHERE 1=1'
+        params = []
+
+        for fields in search_filters:
+            value = request.args.get(fields)
+            if value:
+                query += f' AND {fields} LIKE %s'
+                params.append(f'%{value}%')
+
         with conn.cursor() as cur:
-            cur.execute('SELECT * FROM teachers')
+            cur.execute(query, params)
             teachers = cur.fetchall()
 
         return format_response(teachers)
@@ -226,7 +263,7 @@ def get_teachers_data():
             }, 500)
     
 @apiBp.route('/teacher/<int:teacher_id>', methods=['GET'])
-def get_teacher_api(teacher_id):
+def get_teacher_data(teacher_id):
     try:
         conn = get_db()
         with conn.cursor() as cur:
@@ -391,8 +428,29 @@ def delete_teacher(teacher_id):
 def get_grades_data():
     try:
         conn = get_db()
+
+        search_filters = {
+            'student_name': 'LIKE',
+            'course_name': 'LIKE',
+            'grade': '=',
+            'semester': 'LIKE'
+        }
+
+        query = 'SELECT * FROM grades WHERE 1=1'
+        params = []
+
+        for fields, operators in search_filters.items():
+            value = request.args.get(fields)
+            if value:
+                if operators == 'LIKE':
+                    query += f' AND {fields} LIKE %s'
+                    params.append(f'%{value}%')
+                else:
+                    query += f' AND {fields} = %s'
+                    params.append(value)
+
         with conn.cursor() as cur:
-            cur.execute('SELECT * FROM grades')
+            cur.execute(query, params)
             grades = cur.fetchall()
 
         return format_response(grades)
@@ -405,7 +463,7 @@ def get_grades_data():
             }, 500)
 
 @apiBp.route('/grade/<int:grade_id>', methods=['GET'])
-def get_grade_api(grade_id):
+def get_grade_data(grade_id):
     try:
         conn = get_db()
         with conn.cursor() as cur:
