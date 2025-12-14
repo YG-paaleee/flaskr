@@ -499,7 +499,7 @@ def get_grade_data(grade_id):
 def create_grades():
     try:
         data = request.get_json()
-        required_fields = ['student_id', 'student_name', 'course_code', 'course_name', 'grade', 'semester', 'school_year']
+        required_fields = ['student_name', 'course_name', 'grade', 'semester']
         conn = get_db()
 
 
@@ -512,8 +512,8 @@ def create_grades():
                     }, 400)
         
         with conn.cursor() as cur:
-            cur.execute('INSERT INTO grades (student_id, student_name, course_code, course_name, grade, semester, school_year) VALUES (%s, %s, %s, %s, %s, %s, %s)',
-            (data['student_id'], data['student_name'], data['course_code'], data['course_name'], data['grade'], data['semester'], data['school_year']))
+            cur.execute('INSERT INTO grades (student_name, course_name, grade, semester) VALUES (%s, %s, %s, %s)',
+            (data['student_name'], data['course_name'], data['grade'], data['semester']))
 
             conn.commit()
             new_id = cur.lastrowid
@@ -538,7 +538,7 @@ def update_grade(grade_id):
 
         data = request.get_json()
 
-        ALLOWED_FIELDS = ("student_name", "course_code", "course_name", "grade", "semester", "school_year")
+        ALLOWED_FIELDS = ("student_name", "course_name", "grade", "semester")
         update_fields, params = [], []
 
         conn = get_db()

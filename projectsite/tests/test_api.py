@@ -20,7 +20,7 @@ class TestStudentsAPI:
     def test_get_single_student(self, client):
         response = client.get('/api/student/1')
 
-        assert response.status_code in [200, 404, 500]
+        assert response.status_code in [200, 404]
 
     def test_get_nonexistent_student(self, client):
         response = client.get('/api/student/9999')
