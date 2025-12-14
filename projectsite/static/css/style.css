@@ -86,3 +86,33 @@ code {
   font-size: 14px;
   color: #f53c92;
 }
+
+.api-section {
+  margin-bottom: 40px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.endpoint {
+  margin: 10px 0;
+  padding: 10px;
+  background: #fff;
+  border-radius: 4px;
+}
+
+.method {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  color: white;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+.get { background: #28a745; }
+.post { background: #007bff; }
+.put { background: #ffc107; color: #000; }
+.delete { background: #dc3545; }
+
+.url { font-family: monospace; }
