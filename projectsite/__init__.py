@@ -3,6 +3,8 @@ from . import db
 from flask import Flask
 from .views import indexBp, blogBP
 from .api import apiBp
+from .auth import authBp
+from flask_jwt_extended import JWTManager
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
@@ -13,6 +15,7 @@ def create_app(test_config=None):
         MYSQL_PASSWORD="root",
         MYSQL_DB="psu",
         MYSQL_CURSORCLASS="DictCursor",
+        JWT_SECRET_KEY="super-secret-key",
       )
 
     if test_config is None:
@@ -27,9 +30,12 @@ def create_app(test_config=None):
     
     
     db.init_app(app)
+    jwt = JWTManager(app)
+
 
     app.register_blueprint(indexBp)
     app.register_blueprint(blogBP)
     app.register_blueprint(apiBp)
+    app.register_blueprint(authBp)
 
     return app

@@ -1,6 +1,7 @@
 from .db import get_db
 from flask import Blueprint,jsonify, request, make_response
 import dicttoxml
+from flask_jwt_extended import jwt_required
 
 apiBp = Blueprint('api', __name__, url_prefix = '/api')
 
@@ -87,6 +88,7 @@ def get_student_data(student_id):
         , 500)
 
 @apiBp.route('/students', methods=['POST'])
+@jwt_required()
 def create_students():
 
     try:
@@ -102,7 +104,7 @@ def create_students():
                         'success': False,
                         'error': f'missing required field: {field}'
                     }
-                ), 400
+                , 400)
             
         if '@' not in data['email']:
             return format_response(
@@ -110,7 +112,7 @@ def create_students():
                     'success': False,
                     'error': 'invalid email formats'
                 }
-            ), 400
+            , 400)
         
         with conn.cursor() as cur:
             cur.execute('INSERT INTO students (student_name, course, year_level, email) VALUES (%s, %s, %s, %s)',
@@ -134,6 +136,7 @@ def create_students():
         , 500)
 
 @apiBp.route('/student/<int:student_id>', methods=['PUT'])
+@jwt_required()
 def update_student(student_id):
     try:
 
@@ -162,7 +165,7 @@ def update_student(student_id):
                         return format_response({
                             'success': False,
                             'error': 'Invalid email format'
-                        }), 400
+                        }, 400)
                     
                     update_fields.append(f"{field} = %s")
                     params.append(data[field])
@@ -193,6 +196,7 @@ def update_student(student_id):
         , 500)
     
 @apiBp.route('/student/<int:student_id>', methods=['DELETE'])
+@jwt_required()
 def delete_student(student_id):
     try:
         conn = get_db()
@@ -288,6 +292,7 @@ def get_teacher_data(teacher_id):
             }, 500)
 
 @apiBp.route('/teachers', methods=['POST'])
+@jwt_required()
 def create_teachers():
     try:
         data = request.get_json()
@@ -331,6 +336,7 @@ def create_teachers():
             }, 500)
 
 @apiBp.route('/teacher/<int:teacher_id>', methods=['PUT'])
+@jwt_required()
 def update_teacher(teacher_id):
     try:
 
@@ -389,6 +395,7 @@ def update_teacher(teacher_id):
             }, 500)
 
 @apiBp.route('/teacher/<int:teacher_id>', methods=['DELETE'])
+@jwt_required()
 def delete_teacher(teacher_id):
     try:
         conn = get_db()
@@ -488,6 +495,7 @@ def get_grade_data(grade_id):
             }, 500)
 
 @apiBp.route('/grades', methods=['POST'])
+@jwt_required()
 def create_grades():
     try:
         data = request.get_json()
@@ -524,6 +532,7 @@ def create_grades():
             }, 500)
 
 @apiBp.route('/grade/<int:grade_id>', methods=['PUT'])
+@jwt_required()
 def update_grade(grade_id):
     try:
 
@@ -576,6 +585,7 @@ def update_grade(grade_id):
             }, 500)
 
 @apiBp.route('/grade/<int:grade_id>', methods=['DELETE'])
+@jwt_required()
 def delete_grade(grade_id):
     try:
         conn = get_db()
